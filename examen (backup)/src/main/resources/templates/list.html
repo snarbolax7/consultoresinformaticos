@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/layout/layout :: head">
+
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+
+
+<style>
+.form-inline label {
+	justify-content: left !important;
+}
+
+.form-inline {
+	margin-bottom: 10px;
+}
+</style>
+</head>
+
+
+
+<body>
+	<header th:replace="/layout/layout :: header"></header>
+
+	<div class="container bg-primary">
+		<h1 th:text="${titulo}" class="text text-light"></h1>
+	</div>
+	<span th:text="${alumno}"></span>
+
+	<div class="container border border-dark" style="margin-top: 58px;">
+		<a th:href="@{/stform}" class="btn btn-success text-light btn-block"
+			style="margin-top: 8px; margin-bottom: 8px; margin-left: -6px; width: 1150px;">CREAR
+			ALUMNO</a>
+		<table class="table table-hover">
+			<thead class="bg-dark">
+				<tr>
+					<td class="text-light">ID</td>
+					<td class="text-light">NOMBRE</td>
+					<td class="text-light">APELLIDO</td>
+					<td class="text-light">CEDULA</td>
+					<td class="text-light">CARRERA</td>
+					<td class="text-light">EDITAR</td>
+					<td class="text-light">ELIMINAR</td>
+					<td></td>
+				</tr>
+			</thead>
+			<tbody>
+			</tbody>
+			<tr th:each="alumno : ${alumnos}">
+				<td th:text="${alumno.id}"></td>
+				<td th:text="${alumno.nombre}"></td>
+				<td th:text="${alumno.apellido}"></td>
+				<td th:text="${alumno.cedula}"></td>
+				<td th:text="${alumno.carreraId.descripcion}"></td>
+				<td><a class="btn btn-primary btn-xs"
+					th:href="@{/stform/} + ${alumno.id}" th:text="'EDITAR'"></a></td>
+				<td><a class="btn btn-danger btn-xs "
+					th:href="@{/stform/delete/} + ${alumno.id}" th:text="'ELIMINAR'"
+					data-toggle="modal" data-target="#miModal"
+					th:attr="data-target='#miModal'+${alumno.id }"></a></td>
+
+				<td>
+					<div class="modal fade" th:id="miModal+${alumno.id }" tabindex="-1"
+						role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header bg-danger">
+									<h4 class="modal-title text-light" id="myModalLabel">¿Estas
+										seguro que quieres eliminar?</h4>
+								</div>
+								<div class="modal-body">
+									<form>
+										<div class="form-inline">
+											<label style="justify-content: left;" class="col col-md-3">NOMBRE:</label>
+											<label th:text="${alumno.nombre}"></label>
+										</div>
+										<div class="form-inline">
+											<label style="justify-content: left;" class="col col-md-3">APELLIDO:</label>
+											<label th:text="${alumno.apellido}"></label>
+										</div>
+										<div class="form-inline">
+											<label style="justify-content: left;" class="col col-md-3">CEDULA:</label>
+											<label th:text="${alumno.cedula}"></label>
+										</div>
+										<div class="form-inline">
+											<label style="justify-content: left;" class="col col-md-3">CARRERA:</label>
+											<label th:text="${alumno.carreraId.descripcion}"></label>
+										</div>
+									</form>
+								</div>
+								<div class="modal-footer">
+									<a class="btn btn-danger" th:href="@{/delete/} + ${alumno.id}"
+										aria-label="Close">Eliminar</a> <a data-dismiss="modal"
+										class="btn btn-secondary">Cancelar</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</td>
+
+
+			</tr>
+		</table>
+	</div>
+	<footer th:replace="/layout/layout :: footer"></footer>
+
+</body>
+
+</html>
