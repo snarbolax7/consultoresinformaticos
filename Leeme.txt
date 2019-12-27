@@ -1,0 +1,2 @@
+*La base de datos a crearse debe llamarse "prueba", en pgadmin de Postgres.
+*La URL de home es: localhost:8080/view.
