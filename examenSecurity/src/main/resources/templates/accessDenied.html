@@ -1,10 +1,20 @@
 <!DOCTYPE html>
-<html>
-<head>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="layout/layout :: head">
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-<img src="images/html-access-not-granted.png"/>
+	<header th:replace="layout/layout :: header"></header>
+	<div class="container py-4">
+		<div class="card border-dark text-center" style="margin-top: 34px;">
+			<div class="card-header bg-dark text-light">Access denied</div>
+			<div class="card-body">
+				<strong>You don't possess the necessary privileges as USER: <span sec:authentication="name"></span></strong>
+			</div>
+		</div>
+	</div>
+	<footer th:replace="layout/layout :: footer"></footer>
 </body>
 </html>
