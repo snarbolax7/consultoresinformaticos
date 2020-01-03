@@ -12,10 +12,17 @@
 		<span aria-hidden="true">&times;</span>
 	</button>
 </div>
+<div id="logout" th:if="${logout}=='success'" class="alert alert-success"
+	style="display: block; text-align: center; margin-top: 57px">
+	You have logged out successfully
+	<button type="button" class="close" data-dismiss="alert"
+		aria-hidden="true">
+		<span aria-hidden="true">&times;</span>
+	</button>
+</div>
 <body>
 	<header th:replace="layout/layout :: header"></header>
 	<div class="container py-4">
-
 		<div class="card border-dark text-center" style="margin-top: 34px;">
 			<div class="card-header">Please sign in</div>
 			<div class="card-body">
@@ -37,9 +44,7 @@
 					</div>
 				</form>
 			</div>
-
 		</div>
-
 	</div>
 	<footer th:replace="layout/layout :: footer"></footer>
 </body>

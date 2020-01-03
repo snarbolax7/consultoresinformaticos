@@ -41,7 +41,6 @@ public class AlumnoController {
 		}
 	}
 
-	@CrossOrigin(origins = "http://localhost:8080/stform")
 	@PostMapping(value = "/save", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> save(@RequestBody AlumnoRequest model) {
 

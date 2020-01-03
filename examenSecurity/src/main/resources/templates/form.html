@@ -68,15 +68,14 @@
 					<label>CARRERA:</label>
 					<div>
 						<a th:if="${modo}=='editar'"> <select required id="carrera"
-							th:field="*{carreraId}" class="btn btn-primary "
+							th:field="*{carreraId}" class="btn btn-dark "
 							style="padding-left: 35px; padding-right: 34px;">
 								<option th:if="${carreras == null}" value="">CARRERA</option>
 								<option th:each="carrera:${carreras}" th:value="${carrera.id}"
 									th:utext="${carrera.descripcion}"></option>
 						</select></a> <a th:unless="${modo=='editar'}"><select required
-							id="carrera" th:field="*{carreraId}"
-							class="btn btn-primary "
-							style="padding-left: 35px; padding-right: 34px;">
+							id="carrera" th:field="*{carreraId}" class="btn btn-dark "
+							style="padding-left: 35px; padding-right: 34px;" onch>
 								<option value="">CARRERA</option>
 								<option th:each="carrera:${carreras}" th:value="${carrera.id}"
 									th:utext="${carrera.descripcion}"></option>
@@ -165,12 +164,25 @@
 			var apellido = document.getElementById("apellido").value;
 			var carrera = document.getElementById("carrera").value;
 			var cedula = document.getElementById("cedula").value;
-
+			
 			document.getElementById("nombreModal").innerHTML = nombre;
 			document.getElementById("apellidoModal").innerHTML = apellido;
 			document.getElementById("cedulaModal").innerHTML = cedula;
-			document.getElementById("carreraModal").innerHTML = carrera;
 
+			const Http = new XMLHttpRequest();
+				const url = 'http://localhost:8080/carreras';
+				Http.open("GET", url, false);
+				Http.setRequestHeader('Content-type',
+				'application/json; charset=utf-8');
+				Http.send();
+				var response = JSON.parse(Http.response);
+				
+				for (var i = 0; i < response.length; i+=1){
+					if(carrera == response[i].id){
+			 			document.getElementById("carreraModal").innerHTML = response[i].descripcion;
+						break;
+					}
+				}
 		}
 
 		function editOne() {
@@ -245,7 +257,7 @@
 			 if(body.cedula.length < 2 || body.nombre.length > 45){
 				 document.getElementById("cedulaValid").style.display='table-row';
 				 flag=true;
-
+				 
 			 }
 			 
 			 if(isNaN(body.carreraId)){

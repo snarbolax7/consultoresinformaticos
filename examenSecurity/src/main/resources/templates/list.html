@@ -7,8 +7,6 @@
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
-
-
 <style>
 .form-inline label {
 	justify-content: left !important;
@@ -20,18 +18,35 @@
 </style>
 </head>
 
-
-
 <body>
+	<div id="logged" th:if="${logged}=='success'"
+		class="alert alert-success"
+		style="display: block; text-align: center; margin-top: 57px">
+		Ya has iniciado sesion.
+		<button type="button" class="close" data-dismiss="alert"
+			aria-hidden="true">
+			<span aria-hidden="true">&times;</span>
+		</button>
+	</div>
+	<div id="success" th:if="${message}=='success'"
+		class="alert alert-success"
+		style="display: block; text-align: center; margin-top: 57px">
+		El alumno se ha eliminado correctamente con C.I.: <strong
+			th:text="${alumnoId}"></strong>
+		<button type="button" class="close" data-dismiss="alert"
+			aria-hidden="true">
+			<span aria-hidden="true">&times;</span>
+		</button>
+	</div>
+
 	<header th:replace="/layout/layout :: header"></header>
 
 	<div class="container bg-primary">
 		<h1 th:text="${titulo}" class="text text-light"></h1>
 	</div>
 	<span th:text="${alumno}"></span>
-
 	<div class="container border border-dark" style="margin-top: 58px;">
-		<a th:href="@{/stform}" class="btn btn-success text-light btn-block"
+		<a th:href="@{/stform}" class="btn btn-primary text-light btn-block"
 			style="margin-top: 8px; margin-bottom: 8px; margin-left: -6px; width: 1150px;">CREAR
 			ALUMNO</a>
 		<table class="table table-hover">
@@ -42,8 +57,8 @@
 					<td class="text-light">APELLIDO</td>
 					<td class="text-light">CEDULA</td>
 					<td class="text-light">CARRERA</td>
-					<td class="text-light">EDITAR</td>
-					<td class="text-light">ELIMINAR</td>
+					<td class="text-light"></td>
+					<td class="text-light"></td>
 					<td></td>
 				</tr>
 			</thead>
@@ -56,12 +71,13 @@
 				<td th:text="${alumno.cedula}"></td>
 				<td th:text="${alumno.carreraId.descripcion}"></td>
 				<td><a class="btn btn-primary btn-xs"
-					th:href="@{/stform/} + ${alumno.id}" th:text="'EDITAR'"></a></td>
+					th:href="@{/stform/} + ${alumno.id}"><i
+						class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
 				<td><a class="btn btn-danger btn-xs "
-					th:href="@{/stform/delete/} + ${alumno.id}" th:text="'ELIMINAR'"
-					data-toggle="modal" data-target="#miModal"
-					th:attr="data-target='#miModal'+${alumno.id }"></a></td>
-
+					th:href="@{/stform/delete/} + ${alumno.id}" data-toggle="modal"
+					data-target="#miModal"
+					th:attr="data-target='#miModal'+${alumno.id }"><i
+						class="fa fa-trash-o" aria-hidden="true"></i> </a></td>
 				<td>
 					<div class="modal fade" th:id="miModal+${alumno.id }" tabindex="-1"
 						role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -100,13 +116,9 @@
 						</div>
 					</div>
 				</td>
-
-
 			</tr>
 		</table>
 	</div>
 	<footer th:replace="/layout/layout :: footer"></footer>
-
 </body>
-
 </html>

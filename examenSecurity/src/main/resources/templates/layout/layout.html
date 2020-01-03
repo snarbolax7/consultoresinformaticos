@@ -4,11 +4,12 @@
 <head th:fragment="head">
 <meta charset="UTF-8">
 <title th:text="${titulo}"></title>
-
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
 	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
 	crossorigin="anonymous">
+<link rel="stylesheet" type="text/css"
+	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
 <style type="text/css">
 .container {
 	padding: 0px;
@@ -21,13 +22,13 @@
 .form-inline .form-control {
 	width: 250px;
 }
-#usuario_logeado{
-	text-transform:uppercase;
+
+#usuario_logeado {
+	text-transform: uppercase;
 }
 </style>
 </head>
 <body>
-
 	<header th:fragment="header">
 		<nav class="navbar navbar-expand-lg navbar-light bg-dark fixed-top"
 			role="navigation">
@@ -38,7 +39,6 @@
 				aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
-
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav mr-auto">
 					<li class="nav-item active"><a class="nav-link text-light"
@@ -66,33 +66,8 @@
 				</form>
 			</div>
 		</nav>
-
-		<!-- 		<div class="alert alert-success alert-dismissable" -->
-		<!-- 			style="margin-top: 57px; text-align: center;" -->
-		<!-- 			th:if="${success != null}" th:text="${success}"> -->
-		<!-- 			<button type="button" class="close" data-dismiss="alert" aria-hidden="true"><span aria-hidden="true">&times;</span></button> -->
-		<!-- 		</div> -->
-		<!-- 		<div class="alert alert-danger" -->
-		<!-- 			style="margin-top: 57px; text-align: center;" -->
-		<!-- 			th:if="${error != null}" th:text="${error}"> -->
-		<!-- 			<button type="button" class="close" data-dismiss="alert" aria-hidden="true"><span aria-hidden="true">&times;</span></button> -->
-		<!-- 		</div> -->
-		<!-- 		<div class="alert alert-warning" -->
-		<!-- 			style="margin-top: 57px; text-align: center;" -->
-		<!-- 			th:if="${warning != null}" th:text="${warning}"> -->
-		<!-- 			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button> -->
-		<!-- 		</div> -->
-		<!-- 		<div class="alert alert-info" -->
-		<!-- 			style="margin-top: 57px; text-align: center;" th:if="${info != null}" -->
-		<!-- 			th:text="${info}"> -->
-		<!-- 			<button type="button" class="close" data-dismiss="alert" -->
-		<!-- 				aria-hidden="true">&times;</button> -->
-		<!-- 		</div> -->
-
 	</header>
-
-
-	<footer th:fragment="footer" class="fixed-bottom bg-dark" >
+	<footer th:fragment="footer" class="fixed-bottom bg-dark">
 		<div id="usuario_logeado" class="container ">
 			<p class="text-light text-start" sec:authorize="isAuthenticated()">
 				Usuario logeado: <span sec:authentication="name"></span> | Roles: <span
@@ -111,7 +86,5 @@
 			integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
 			crossorigin="anonymous"></script>
 	</footer>
-
-
 </body>
 </html>

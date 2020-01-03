@@ -2,21 +2,14 @@ package com.trabajo.web.controller;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.persistence.PrePersist;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import com.trabajo.web.model.request.AlumnoRequest;
 import com.trabajo.web.model.response.AlumnoResponse;
 import com.trabajo.web.model.response.CarreraResponse;
@@ -97,34 +90,6 @@ public class AlumnoControllerView {
 		return "form";
 	}
 
-//	@PostMapping(value = "/stform")
-//	public String save(@ModelAttribute(name = "alumno") AlumnoRequest alumno, Model model, RedirectAttributes flash,
-//			SessionStatus status) {
-//		if (null == alumnoService.save(alumno)) {
-//
-//			if (alumno.getNombre().length() < 2 || alumno.getNombre().length() > 45 || alumno.getNombre().isEmpty()) {
-//				flash.addFlashAttribute("nombre", 1);
-//			}
-//			if (alumno.getApellido().length() < 2 || alumno.getApellido().length() > 45 || alumno.getApellido().isEmpty()) {
-//				flash.addFlashAttribute("apellido", 1);
-//			}
-//			if (alumno.getCedula().length() < 2 || alumno.getCedula().length() > 45 || alumno.getCedula().isEmpty()) {
-//				flash.addFlashAttribute("cedula", 1);
-//			}
-//
-//			flash.addFlashAttribute("alumno", alumno);
-//			flash.addFlashAttribute("carreras", carreraService.getAll());
-//			flash.addFlashAttribute("error", "Alumno no pudo ser creado");
-//			return "form";
-//
-//		} else {
-//			status.setComplete();
-//			flash.addFlashAttribute("success", "Alumno fue creado con C.I.: "+ alumno.getCedula());
-//			return "redirect:/view";
-//		}
-//
-//	}
-
 	@GetMapping("/search")
 	public String search(@RequestParam("name") String name, Model model) {
 		List<AlumnoResponse> alumnoList = alumnoService.findName(name);
@@ -141,19 +106,10 @@ public class AlumnoControllerView {
 	@Transactional
 	@GetMapping(value = "/delete/{id}")
 	public String delete(@PathVariable Integer id, RedirectAttributes flash) {
-		flash.addFlashAttribute("info", "Alumno fue eliminado exitosamente con C.I.: " + alumnoService.findOne(id).getCedula());
+		flash.addFlashAttribute("alumnoId", alumnoService.findOne(id).getCedula());
+		flash.addFlashAttribute("message", "success");
 		alumnoService.deleteOne(id);
 		return "redirect:/view";
 	}
-	
-//	@GetMapping(value = "/stform/recuperar/{id}")
-//	public String getOneDelete(@PathVariable(value = "id") Integer id, Model model) {
-//		model.addAttribute("idRecuperado", id);
-//		List<AlumnoResponse> alumnos = new ArrayList<AlumnoResponse>();
-//		alumnos = alumnoService.getAll();
-//		model.addAttribute("alumnos", alumnos);
-//		model.addAttribute("modal", false);
-//		return "list";
-//	}
 
 }
